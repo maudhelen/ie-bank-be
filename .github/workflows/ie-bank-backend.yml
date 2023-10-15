@@ -11,7 +11,7 @@ permissions:
   id-token: write
 
 env:
-  BACKEND_WEBAPP_DEV: maudhelen2-be-dev
+  BACKEND_WEBAPP_DEV: maudhelen22-be-dev
 
 jobs:
   build:
