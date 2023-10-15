@@ -34,11 +34,3 @@ with app.app_context():
 CORS(app)
 
 from iebank_api import routes
-
-if os.getenv("ENV") == "dev" or os.getenv("ENV") == "uat":
-    appinsights = AppInsights(app)
-
-    @app.after_request
-    def after_request(response):
-        appinsights.flush()
-        return response
