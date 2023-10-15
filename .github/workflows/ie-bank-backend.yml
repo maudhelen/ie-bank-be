@@ -11,8 +11,10 @@ permissions:
   id-token: write
 
 env:
-  BACKEND_WEBAPP_UAT: maudhelen-be-uat
   BACKEND_WEBAPP_DEV: maudhelen-be-dev
+  BACKEND_WEBAPP_UAT: maudhelen-be-uat
+  source_branch_name: ${{ github.ref }}
+  pr_target_branch_name: ${{ github.base_ref }}
 
 jobs:
   build:
@@ -50,11 +52,36 @@ jobs:
         path: |
           . 
 
-  deploy:
+  deploy-dev:
     runs-on: ubuntu-latest
     needs: build
     environment:
-      name: 'UAT'
+      name: 'Development'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+    - name: Download artifact from build job
+      uses: actions/download-artifact@v2
+      with:
+        name: python-app
+        path: .
+    
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: 'Deploy to Azure Web App'
+      uses: azure/webapps-deploy@v2
+      id: deploy-to-webapp
+      with:
+        app-name: ${{ env.BACKEND_WEBAPP_DEV }}
+        package: .
+
+  deploy-uat:
+    runs-on: ubuntu-latest
+    needs: [build, deploy-dev]
+    environment:
+      name: 'User Acceptance Testing'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
@@ -74,4 +101,3 @@ jobs:
       with:
         app-name: ${{ env.BACKEND_WEBAPP_UAT }}
         package: .
-    
