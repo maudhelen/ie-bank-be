@@ -11,7 +11,8 @@ permissions:
   id-token: write
 
 env:
-  BACKEND_WEBAPP_DEV: maudhelen-be-dev
+  BACKEND_WEBAPP_DEV: maudhelen-be-dev¨
+  BACKEND_WEBAPP_UAT: maudhelen-be-uat
 
 jobs:
   build:
@@ -71,6 +72,6 @@ jobs:
       uses: azure/webapps-deploy@v2
       id: deploy-to-webapp
       with:
-        app-name: ${{ env.BACKEND_WEBAPP_DEV }}
+        app-name: ${{ env.BACKEND_WEBAPP_UAT }}
         package: .
     
