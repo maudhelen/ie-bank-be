@@ -27,11 +27,11 @@ def test_account_repr():
     assert repr(account) == f"<Event '{(account.account_number)}'>"
 
 
-def test_account_deactivate():
+def test_account_initial_balance():
     """
-    GIVEN a Account model
+    GIVEN a new Account
     WHEN a new Account is created
-    THEN check the __deactivate__ method is defined correctly
+    THEN check that the initial balance is 0.0
     """
-    account = Account("John Doe", "Spain", "€")
-    assert account.__deactivate__() == "Inactive"
+    account = Account('John Doe', '€', 'Spain')
+    assert account.balance == 0.0
