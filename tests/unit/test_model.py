@@ -23,7 +23,7 @@ def test_account_repr():
     WHEN a new Account is created
     THEN check the __repr__ method is defined correctly
     """
-    account = Account("John Doe", "Spain", "€")
+    account = Account("John Doe", "€", "Spain")
     assert repr(account) == f"<Event '{(account.account_number)}'>"
 
 
