@@ -12,7 +12,6 @@
   - [Continuos Delivery](#continuos-delivery)
     - [GitHub secrets](#github-secrets)
 
-
 ## Overview
 
 This is the repository for the backend code of the IE Bank web app
