@@ -13,7 +13,7 @@ permissions:
 
 env:
   BACKEND_WEBAPP_DEV: maudhelen-be-dev
-  BACKEND_WEBAPP_UAT: maudhelen-be-uat
+  BACKEND_WEBAPP_UAT: maudhelen2-be-uat
   source_branch_name: ${{ github.ref }}
   pr_target_branch_name: ${{ github.base_ref }}
 
